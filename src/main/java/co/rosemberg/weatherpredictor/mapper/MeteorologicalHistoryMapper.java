@@ -1,14 +1,11 @@
 package co.rosemberg.weatherpredictor.mapper;
 
-import co.rosemberg.weatherpredictor.domain.Planet;
 import co.rosemberg.weatherpredictor.domain.Weather;
 import co.rosemberg.weatherpredictor.entity.MeteorologicalHistory;
 import co.rosemberg.weatherpredictor.entity.MeteorologicalHistoryEntry;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component

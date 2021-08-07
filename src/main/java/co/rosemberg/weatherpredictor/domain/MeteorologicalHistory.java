@@ -49,4 +49,14 @@ public class MeteorologicalHistory {
     public void setDay(Integer day) {
         this.day = day;
     }
+
+    @Override
+    public String toString() {
+        return "MeteorologicalHistory{" +
+                "referencePlanet=" + referencePlanet.toString() +
+                ", planetWithGrades=" + planetWithGrades.toString() +
+                ", currentWeather=" + currentWeather.toString() +
+                ", day=" + day +
+                '}';
+    }
 }

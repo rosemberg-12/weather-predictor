@@ -4,11 +4,9 @@ import co.rosemberg.weatherpredictor.domain.Planet;
 import co.rosemberg.weatherpredictor.dto.PlanetListResponse;
 import co.rosemberg.weatherpredictor.dto.WeatherResponse;
 import co.rosemberg.weatherpredictor.service.PlanetService;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController

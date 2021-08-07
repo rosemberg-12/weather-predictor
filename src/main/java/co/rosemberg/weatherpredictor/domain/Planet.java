@@ -47,4 +47,11 @@ public class Planet {
     public void setRotation(Rotation rotation) {
         this.rotation = rotation;
     }
+
+    @Override
+    public String toString() {
+        return "Planet{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

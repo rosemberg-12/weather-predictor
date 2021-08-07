@@ -31,6 +31,21 @@ public class MeteorologicalHistoryEntry {
         this.grade = grade;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public MeteorologicalHistory getHistory() {
+        return history;
+    }
+
+    public void setHistory(MeteorologicalHistory history) {
+        this.history = history;
+    }
 
     public Planet getPlanet() {
         return planet;
