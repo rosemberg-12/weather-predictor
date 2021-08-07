@@ -8,6 +8,7 @@ import java.util.List;
 public class Planet {
 
     @Id
+    @Column(name="name_planet")
     private String name;
 
     @Column(name = "distance_from_sun")
@@ -15,6 +16,8 @@ public class Planet {
 
     @Column(name = "angular_velocity")
     private Integer angularVelocity;
+
+    private String rotation;
 
     public String getName() {
         return name;
@@ -38,5 +41,13 @@ public class Planet {
 
     public void setAngularVelocity(Integer angularVelocity) {
         this.angularVelocity = angularVelocity;
+    }
+
+    public String getRotation() {
+        return rotation;
+    }
+
+    public void setRotation(String rotation) {
+        this.rotation = rotation;
     }
 }

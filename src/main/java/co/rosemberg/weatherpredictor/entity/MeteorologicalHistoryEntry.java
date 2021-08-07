@@ -7,16 +7,23 @@ import javax.persistence.*;
 public class MeteorologicalHistoryEntry {
 
     @Id
+    @Column(name="id_history_entry")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name= "id_history", insertable = false, updatable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name= "id_history", insertable = false, updatable = false )
     private MeteorologicalHistory history;
 
-    @ManyToOne
-    @JoinColumn(name= "name", insertable = false, updatable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name= "name_planet", insertable = false, updatable = false)
     private Planet planet;
+
+    private Integer grade;
+
+    public MeteorologicalHistoryEntry() {
+
+    }
 
     public MeteorologicalHistoryEntry(MeteorologicalHistory history, Planet planet, Integer grade) {
         this.history = history;
@@ -24,7 +31,6 @@ public class MeteorologicalHistoryEntry {
         this.grade = grade;
     }
 
-    private Integer grade;
 
     public Planet getPlanet() {
         return planet;

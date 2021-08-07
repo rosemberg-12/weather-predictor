@@ -5,13 +5,15 @@ public class Planet {
     private String name;
     private Integer distanceFromSun;
     private Integer angularVelocity;
+    private Rotation rotation;
 
     public Planet(){}
 
-    public Planet(String name, Integer distanceFromSun, Integer angularVelocity) {
+    public Planet(String name, Integer distanceFromSun, Integer angularVelocity, Rotation rotation) {
         this.name = name;
         this.distanceFromSun = distanceFromSun;
         this.angularVelocity = angularVelocity;
+        this.rotation= rotation;
     }
 
     public String getName() {
@@ -36,5 +38,13 @@ public class Planet {
 
     public void setAngularVelocity(Integer angularVelocity) {
         this.angularVelocity = angularVelocity;
+    }
+
+    public Rotation getRotation() {
+        return rotation;
+    }
+
+    public void setRotation(Rotation rotation) {
+        this.rotation = rotation;
     }
 }

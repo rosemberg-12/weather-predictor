@@ -1,6 +1,7 @@
 package co.rosemberg.weatherpredictor.mapper;
 
 import co.rosemberg.weatherpredictor.domain.Planet;
+import co.rosemberg.weatherpredictor.domain.Rotation;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,6 +12,7 @@ public class PlanetMapper extends Mapper<co.rosemberg.weatherpredictor.entity.Pl
         entity.setName(domain.getName());
         entity.setAngularVelocity(domain.getAngularVelocity());
         entity.setDistanceFromSun(domain.getDistanceFromSun());
+        entity.setRotation(domain.getRotation().name());
         return entity;
     }
 
@@ -19,6 +21,7 @@ public class PlanetMapper extends Mapper<co.rosemberg.weatherpredictor.entity.Pl
         domain.setName(entity.getName());
         domain.setAngularVelocity(entity.getAngularVelocity());
         domain.setDistanceFromSun(entity.getDistanceFromSun());
+        domain.setRotation(Rotation.valueOf(entity.getRotation()));
         return domain;
     }
 }

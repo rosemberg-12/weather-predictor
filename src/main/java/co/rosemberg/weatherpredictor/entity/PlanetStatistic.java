@@ -8,11 +8,12 @@ import java.util.List;
 public class PlanetStatistic {
 
     @Id
+    @Column(name="id_planet_statistic")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name= "name", insertable = false, updatable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name= "name_planet", insertable = false, updatable = false)
     private Planet planet;
 
     @Column(name = "drought_periods")
