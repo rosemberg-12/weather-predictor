@@ -4,6 +4,7 @@ import co.rosemberg.weatherpredictor.dao.HistoryDao;
 import co.rosemberg.weatherpredictor.dao.PlanetDao;
 import co.rosemberg.weatherpredictor.domain.MeteorologicalHistory;
 import co.rosemberg.weatherpredictor.domain.Planet;
+import co.rosemberg.weatherpredictor.domain.Rotation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -62,15 +63,26 @@ public class WeatherSimulator {
                 historyList.add(currentDay);
 
                 planetInformation=planetInformation.entrySet().stream()
-                        .collect(Collectors.toMap(Map.Entry::getKey,entry->{
-                            int newGrade=entry.getValue()+entry.getKey().getAngularVelocity();
-                            if(360-newGrade<=0){
-                                newGrade=newGrade-360;
-                            }
-                            return newGrade;
-                        }));
+                        .collect(Collectors.toMap(Map.Entry::getKey,entry-> makeGradeMovement(entry.getKey(), entry.getValue())));
             }
             historyDao.saveHistoryList(historyList);
         });
+    }
+
+    private Integer makeGradeMovement(Planet planet, Integer currentGrade){
+        int newGrade;
+        if(planet.getRotation()== Rotation.RIGHT){
+            newGrade=currentGrade+planet.getAngularVelocity();
+            if(360-newGrade<=0){
+                newGrade=newGrade-360;
+            }
+        }else{
+            newGrade=currentGrade-planet.getAngularVelocity();
+            if(newGrade<0){
+                newGrade=newGrade+360;
+            }
+        }
+
+        return newGrade;
     }
 }
