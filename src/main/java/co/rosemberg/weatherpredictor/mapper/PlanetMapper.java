@@ -5,7 +5,7 @@ import co.rosemberg.weatherpredictor.domain.Rotation;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PlanetMapper extends Mapper<co.rosemberg.weatherpredictor.entity.Planet, Planet>{
+public class PlanetMapper{
 
     public co.rosemberg.weatherpredictor.entity.Planet domainToEntity(Planet domain){
         co.rosemberg.weatherpredictor.entity.Planet entity= new co.rosemberg.weatherpredictor.entity.Planet();

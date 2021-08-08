@@ -23,11 +23,11 @@ public class WeatherSimulator {
     private final Integer years;
     private final Integer initialGrade;
 
-    public WeatherSimulator(PlanetDao planetDao, HistoryDao historyDao, WeatherCalculator weatherCaculator,
+    public WeatherSimulator(PlanetDao planetDao, HistoryDao historyDao, WeatherCalculator weatherCalculator,
                             @Value("${years.initial:10}") String years, @Value("${grade.initial:0}") String initialGrade) {
         this.planetDao = planetDao;
         this.historyDao = historyDao;
-        this.weatherCalculator = weatherCaculator;
+        this.weatherCalculator = weatherCalculator;
         this.years=Integer.parseInt(years);
         this.initialGrade=Integer.parseInt(initialGrade);
 
@@ -43,8 +43,8 @@ public class WeatherSimulator {
         CompletableFuture.allOf(taskToExecute).whenComplete((unused, throwable) -> System.out.println("Operation end"));
     }
 
-    private CompletableFuture<Boolean> createSimulationPerPlanet(final Planet referencePlanet, final List<Planet> planets){
-        return CompletableFuture.supplyAsync(()->{
+    private CompletableFuture createSimulationPerPlanet(final Planet referencePlanet, final List<Planet> planets){
+        return CompletableFuture.runAsync(()->{
 
             List<MeteorologicalHistory> historyList= new ArrayList<>();
             Map<Planet,Integer> planetInformation= planets.stream().collect(Collectors.toMap(Function.identity(),planet->this.initialGrade));
@@ -69,10 +69,8 @@ public class WeatherSimulator {
                             }
                             return newGrade;
                         }));
-
             }
-            historyList.forEach(System.out::println);
-            return historyDao.saveHistoryList(historyList);
+            historyDao.saveHistoryList(historyList);
         });
     }
 }

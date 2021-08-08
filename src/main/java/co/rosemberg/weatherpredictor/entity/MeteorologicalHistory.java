@@ -12,15 +12,15 @@ public class MeteorologicalHistory {
     @Column(name="id_history")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="name_planet", nullable = false)
+    @ManyToOne
+    @JoinColumn(name ="name_planet")
     private Planet referencePlanet;
 
     private Integer day;
 
     private String weather;
 
-    @OneToMany(mappedBy = "history")
+    @OneToMany(mappedBy = "history", cascade = CascadeType.PERSIST)
     private List<MeteorologicalHistoryEntry> planetEntries;
 
     public Long getId() {

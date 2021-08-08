@@ -11,12 +11,12 @@ public class MeteorologicalHistoryEntry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name= "id_history", insertable = false, updatable = false )
+    @ManyToOne
+    @JoinColumn(name= "id_history")
     private MeteorologicalHistory history;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name= "name_planet", insertable = false, updatable = false)
+    @ManyToOne(cascade=CascadeType.MERGE)
+    @JoinColumn(name= "name_planet")
     private Planet planet;
 
     private Integer grade;

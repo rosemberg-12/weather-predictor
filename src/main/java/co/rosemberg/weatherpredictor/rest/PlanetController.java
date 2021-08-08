@@ -5,6 +5,7 @@ import co.rosemberg.weatherpredictor.dto.PlanetListResponse;
 import co.rosemberg.weatherpredictor.dto.WeatherResponse;
 import co.rosemberg.weatherpredictor.service.PlanetService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -44,6 +45,7 @@ public class PlanetController {
     }
 
     @PostMapping("/")
+    @Async
     public ResponseEntity populatePrediction(){
         if(planetService.startWeatherSimulation()){
             return ResponseEntity.ok().build();

@@ -1,15 +1,17 @@
 package co.rosemberg.weatherpredictor.mapper;
 
+import co.rosemberg.weatherpredictor.domain.Planet;
 import co.rosemberg.weatherpredictor.domain.Weather;
 import co.rosemberg.weatherpredictor.entity.MeteorologicalHistory;
 import co.rosemberg.weatherpredictor.entity.MeteorologicalHistoryEntry;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
-public class MeteorologicalHistoryMapper extends Mapper<MeteorologicalHistory, co.rosemberg.weatherpredictor.domain.MeteorologicalHistory> {
+public class MeteorologicalHistoryMapper{
 
     private final PlanetMapper planetMapper;
 
@@ -17,7 +19,6 @@ public class MeteorologicalHistoryMapper extends Mapper<MeteorologicalHistory, c
         this.planetMapper = planetMapper;
     }
 
-    @Override
     public MeteorologicalHistory domainToEntity(co.rosemberg.weatherpredictor.domain.MeteorologicalHistory domain) {
         MeteorologicalHistory entity=new MeteorologicalHistory();
         entity.setDay(domain.getDay());
@@ -32,7 +33,21 @@ public class MeteorologicalHistoryMapper extends Mapper<MeteorologicalHistory, c
         return entity;
     }
 
-    @Override
+    public MeteorologicalHistory domainToEntityFromCache(co.rosemberg.weatherpredictor.domain.MeteorologicalHistory domain,
+                                                         Map<String, co.rosemberg.weatherpredictor.entity.Planet> cache) {
+        MeteorologicalHistory entity=new MeteorologicalHistory();
+        entity.setDay(domain.getDay());
+        entity.setReferencePlanet(cache.get(domain.getReferencePlanet().getName()));
+        entity.setWeather(domain.getCurrentWeather().name());
+        if(domain.getPlanetWithGrades()!= null && !domain.getPlanetWithGrades().isEmpty()){
+            List<MeteorologicalHistoryEntry> entryList = domain.getPlanetWithGrades().entrySet().stream().
+                    map(entry->new MeteorologicalHistoryEntry(entity, cache.get(entry.getKey().getName()), entry.getValue())).
+                    collect(Collectors.toList());
+            entity.setPlanetEntries(entryList);
+        }
+        return entity;
+    }
+
     public co.rosemberg.weatherpredictor.domain.MeteorologicalHistory entityToDomain(MeteorologicalHistory entity) {
         co.rosemberg.weatherpredictor.domain.MeteorologicalHistory domain= new co.rosemberg.weatherpredictor.domain.MeteorologicalHistory();
         domain.setDay(entity.getDay());
