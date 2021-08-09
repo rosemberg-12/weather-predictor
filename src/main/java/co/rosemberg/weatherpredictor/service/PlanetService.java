@@ -31,7 +31,7 @@ public class PlanetService {
     public MeteorologicalHistory getWeatherCondition(Integer day, String planetName){
         MeteorologicalHistory history=null;
         Planet planet=this.getPlanet(planetName);
-        if(planet!=null && day!=null && day>0){
+        if(planet!=null && day!=null && day>=0){
             history=historyDao.getHistoryByPlanetNameAndDay(planetName,day);
         }
 
