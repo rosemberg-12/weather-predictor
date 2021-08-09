@@ -1,5 +1,6 @@
 package co.rosemberg.weatherpredictor.component.WeatherConditions;
 
+import co.rosemberg.weatherpredictor.component.PolygonOperator;
 import co.rosemberg.weatherpredictor.domain.MeteorologicalHistory;
 import co.rosemberg.weatherpredictor.fixture.MeteorologicalHistoryFixture;
 import org.junit.jupiter.api.BeforeAll;
@@ -22,7 +23,7 @@ class RainConditionTest {
 
     @BeforeAll
     void setupTest(){
-        this.condition= new RainCondition();
+        this.condition= new RainCondition(new PolygonOperator());
     }
 
     @ParameterizedTest

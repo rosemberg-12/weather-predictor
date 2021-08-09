@@ -24,17 +24,17 @@ public class PolygonOperator {
         return Math.round((jY / jX)*100)/100d;
     }
 
-    public Pair<Planet, Pair<Double, Double>> polarCoordinatesToCartesian(Double value, Planet planet) {
-        Double xPoint= planet.getDistanceFromSun()* Math.cos(Math.toRadians(value));
-        Double yPoint= planet.getDistanceFromSun()* Math.sin(Math.toRadians(value));
+    public Pair<Double, Double> polarCoordinatesToCartesian(Double grade, Integer radius) {
+        Double xPoint= Math.round((radius* Math.cos(Math.toRadians(grade)))*1000000)/1000000d;
+        Double yPoint= Math.round((radius* Math.sin(Math.toRadians(grade)))*1000000)/1000000d;
 
-        return Pair.of(planet, Pair.of(xPoint,yPoint));
+        return Pair.of(xPoint,yPoint);
     }
 
     public Double getPerimeterOfTriangle(Map<Planet, Double> planetWithGrades) {
         List<Pair<Double, Double>> coords= planetWithGrades.entrySet().stream().
-                map(planetIntegerEntry -> polarCoordinatesToCartesian(planetIntegerEntry.getValue(),planetIntegerEntry.getKey()))
-                .map(Pair::getSecond).collect(Collectors.toList());
+                map(planetIntegerEntry -> polarCoordinatesToCartesian(planetIntegerEntry.getValue(),planetIntegerEntry.getKey().
+                        getDistanceFromSun())).collect(Collectors.toList());
 
         Pair<Double, Double> p1=coords.get(0);
         Pair<Double, Double> p2=coords.get(1);
@@ -46,6 +46,6 @@ public class PolygonOperator {
     private double calculateSideDistance(Pair<Double, Double> p1, Pair<Double, Double> p2){
         double x = Math.pow(((p2.getFirst())-(p1.getFirst())),2);
         double y = Math.pow(((p2.getSecond())-(p1.getSecond())),2);
-        return Math.sqrt((x+y));
+        return Math.round(Math.sqrt((x+y))*100000)/100000d;
     }
 }

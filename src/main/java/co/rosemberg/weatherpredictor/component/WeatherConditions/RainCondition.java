@@ -1,7 +1,7 @@
 package co.rosemberg.weatherpredictor.component.WeatherConditions;
 
+import co.rosemberg.weatherpredictor.component.PolygonOperator;
 import co.rosemberg.weatherpredictor.domain.MeteorologicalHistory;
-import co.rosemberg.weatherpredictor.domain.Planet;
 import co.rosemberg.weatherpredictor.domain.Weather;
 import org.springframework.data.util.Pair;
 
@@ -10,12 +10,18 @@ import java.util.stream.Collectors;
 
 public class RainCondition implements WeatherCondition {
 
+    private final PolygonOperator polygonOperator;
+
+    public RainCondition(PolygonOperator polygonOperator) {
+        this.polygonOperator = polygonOperator;
+    }
+
     @Override
     public boolean applyValidation(MeteorologicalHistory instant) {
 
         List<Pair<Double, Double>> coords= instant.getPlanetWithGrades().entrySet().stream().
-                map(planetIntegerEntry -> getRectangularCoords(planetIntegerEntry.getValue(),planetIntegerEntry.getKey()))
-                .map(Pair::getSecond).collect(Collectors.toList());
+                map(planetIntegerEntry -> polygonOperator.polarCoordinatesToCartesian(planetIntegerEntry.getValue(),
+                        planetIntegerEntry.getKey().getDistanceFromSun())).collect(Collectors.toList());
 
         if(coords.size()==3){
             Pair<Double, Double> first=coords.get(0);
@@ -41,14 +47,6 @@ public class RainCondition implements WeatherCondition {
 
     private double triangleArea(double x1, double y1, double x2, double y2, double x3, double y3){
         return Math.abs((x1*(y2-y3) + x2*(y3-y1)+x3*(y1-y2))/2.0);
-    }
-
-
-    private Pair<Planet, Pair<Double, Double>> getRectangularCoords(Double value, Planet planet) {
-        Double xPoint= Math.round((planet.getDistanceFromSun()* Math.cos(Math.toRadians(value)))*1000000)/1000000d;
-        Double yPoint= Math.round((planet.getDistanceFromSun()* Math.sin(Math.toRadians(value)))*1000000)/1000000d;
-
-        return Pair.of(planet, Pair.of(xPoint,yPoint));
     }
 
     @Override

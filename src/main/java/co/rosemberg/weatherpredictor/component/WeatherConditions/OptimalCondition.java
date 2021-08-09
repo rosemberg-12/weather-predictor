@@ -21,8 +21,8 @@ public class OptimalCondition implements WeatherCondition {
     public boolean applyValidation(MeteorologicalHistory instant) {
 
         List<Pair<Double, Double>> coords= instant.getPlanetWithGrades().entrySet().stream().
-                map(planetIntegerEntry -> polygonOperator.polarCoordinatesToCartesian(planetIntegerEntry.getValue(),planetIntegerEntry.getKey()))
-                .map(Pair::getSecond).collect(Collectors.toList());
+                map(planetIntegerEntry -> polygonOperator.polarCoordinatesToCartesian(planetIntegerEntry.getValue(),planetIntegerEntry.getKey().
+                        getDistanceFromSun())).collect(Collectors.toList());
 
         Pair<Double, Double> referencePoint= coords.stream().findAny().get();
 

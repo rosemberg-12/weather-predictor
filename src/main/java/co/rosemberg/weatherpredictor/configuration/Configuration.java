@@ -16,7 +16,8 @@ public class Configuration {
 
     @Bean
     public List<WeatherCondition> getWeatherConditions(){
-        return Stream.of(new DroughtCondition(), new OptimalCondition(new PolygonOperator()), new RainCondition()).collect(Collectors.toList());
+        PolygonOperator operator= new PolygonOperator();
+        return Stream.of(new DroughtCondition(), new OptimalCondition(operator), new RainCondition(operator)).collect(Collectors.toList());
     }
 
 }
