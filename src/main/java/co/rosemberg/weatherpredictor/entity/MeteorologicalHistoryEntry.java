@@ -19,13 +19,13 @@ public class MeteorologicalHistoryEntry {
     @JoinColumn(name= "name_planet")
     private Planet planet;
 
-    private Integer grade;
+    private Double grade;
 
     public MeteorologicalHistoryEntry() {
 
     }
 
-    public MeteorologicalHistoryEntry(MeteorologicalHistory history, Planet planet, Integer grade) {
+    public MeteorologicalHistoryEntry(MeteorologicalHistory history, Planet planet, Double grade) {
         this.history = history;
         this.planet = planet;
         this.grade = grade;
@@ -55,11 +55,11 @@ public class MeteorologicalHistoryEntry {
         this.planet = planet;
     }
 
-    public Integer getGrade() {
+    public Double getGrade() {
         return grade;
     }
 
-    public void setGrade(Integer grade) {
+    public void setGrade(Double grade) {
         this.grade = grade;
     }
 }

@@ -1,5 +1,6 @@
 package co.rosemberg.weatherpredictor.configuration;
 
+import co.rosemberg.weatherpredictor.component.PolygonOperator;
 import co.rosemberg.weatherpredictor.component.WeatherConditions.DroughtCondition;
 import co.rosemberg.weatherpredictor.component.WeatherConditions.OptimalCondition;
 import co.rosemberg.weatherpredictor.component.WeatherConditions.RainCondition;
@@ -15,7 +16,7 @@ public class Configuration {
 
     @Bean
     public List<WeatherCondition> getWeatherConditions(){
-        return Stream.of(new DroughtCondition(), new RainCondition(), new OptimalCondition()).collect(Collectors.toList());
+        return Stream.of(new DroughtCondition(), new OptimalCondition(new PolygonOperator()), new RainCondition()).collect(Collectors.toList());
     }
 
 }

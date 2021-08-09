@@ -5,13 +5,13 @@ import java.util.Map;
 public class MeteorologicalHistory {
 
     private Planet referencePlanet;
-    private Map<Planet, Integer> planetWithGrades;
+    private Map<Planet, Double> planetWithGrades;
     private Weather currentWeather;
     private Integer day;
 
     public MeteorologicalHistory(){}
 
-    public MeteorologicalHistory(Planet referencePlanet, Map<Planet, Integer> planetWithGrades, Weather currentWeather, Integer day) {
+    public MeteorologicalHistory(Planet referencePlanet, Map<Planet, Double> planetWithGrades, Weather currentWeather, Integer day) {
         this.referencePlanet = referencePlanet;
         this.planetWithGrades = planetWithGrades;
         this.currentWeather = currentWeather;
@@ -26,11 +26,11 @@ public class MeteorologicalHistory {
         this.referencePlanet = referencePlanet;
     }
 
-    public Map<Planet, Integer> getPlanetWithGrades() {
+    public Map<Planet, Double> getPlanetWithGrades() {
         return planetWithGrades;
     }
 
-    public void setPlanetWithGrades(Map<Planet, Integer> planetWithGrades) {
+    public void setPlanetWithGrades(Map<Planet, Double> planetWithGrades) {
         this.planetWithGrades = planetWithGrades;
     }
 

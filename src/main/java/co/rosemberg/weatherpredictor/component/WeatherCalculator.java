@@ -19,7 +19,7 @@ public class WeatherCalculator {
     public Weather getWeatherByInstant(MeteorologicalHistory instant){
         return weatherConditions.stream().
                 filter(weatherCondition -> weatherCondition.applyValidation(instant))
-                .findAny().map(WeatherCondition::getWeather).orElse(Weather.UNDEFINED);
+                .findFirst().map(WeatherCondition::getWeather).orElse(Weather.UNDEFINED);
     }
 
 }

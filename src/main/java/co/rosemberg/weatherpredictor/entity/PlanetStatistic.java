@@ -11,8 +11,8 @@ public class PlanetStatistic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name= "name_planet", insertable = false, updatable = false)
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name= "name_planet")
     private Planet planet;
 
     @Column(name = "drought_periods")
@@ -21,8 +21,8 @@ public class PlanetStatistic {
     @Column(name = "rain_periods")
     private Long rainPeriods;
 
-    @Column(name = "max_rain_periods")
-    private Long maxRainPeriods;
+    @Column(name = "max_rain_day")
+    private Long maxRainDay;
 
     @Column(name = "optimal_periods")
     private Long optimalPeriods;
@@ -60,11 +60,11 @@ public class PlanetStatistic {
     }
 
     public Long getMaxRainPeriods() {
-        return maxRainPeriods;
+        return maxRainDay;
     }
 
-    public void setMaxRainPeriods(Long maxRainPeriods) {
-        this.maxRainPeriods = maxRainPeriods;
+    public void setMaxRainPeriods(Long maxRainDay) {
+        this.maxRainDay = maxRainDay;
     }
 
     public Long getOptimalPeriods() {

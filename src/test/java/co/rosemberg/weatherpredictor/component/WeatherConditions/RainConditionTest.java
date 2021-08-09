@@ -8,42 +8,44 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @RunWith(Parameterized.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class DroughtConditionTest {
+class RainConditionTest {
 
-    private DroughtCondition droughtCondition;
+    private RainCondition condition;
 
     @BeforeAll
     void setupTest(){
-        this.droughtCondition= new DroughtCondition();
+        this.condition= new RainCondition();
     }
 
     @ParameterizedTest
     @MethodSource("getAlignedHistories")
-    void testDroughtCase_success(MeteorologicalHistory history){
-        assertTrue(droughtCondition.applyValidation(history));
+    void testRainCase_success(MeteorologicalHistory history){
+        assertTrue(condition.applyValidation(history));
     }
 
     @ParameterizedTest
     @MethodSource("getNotAlignedHistories")
-    void testDroughtCase_fail(MeteorologicalHistory history){
-        assertFalse(droughtCondition.applyValidation(history));
+    void testRainCase_fail(MeteorologicalHistory history){
+        assertFalse(condition.applyValidation(history));
     }
 
     @Parameterized.Parameters
     public static Stream<MeteorologicalHistory> getAlignedHistories(){
-        return MeteorologicalHistoryFixture.getHistoryListWithAlignedGradesRespectToSun().stream();
+        return MeteorologicalHistoryFixture.getHistoryListTriangleWayAndSunInCenter().stream();
     }
 
     @Parameterized.Parameters
     public static Stream<MeteorologicalHistory> getNotAlignedHistories(){
-        return Stream.concat(Stream.concat(MeteorologicalHistoryFixture.getHistoryListWithAlignedGradesNotRespectToSun().stream(),
-                MeteorologicalHistoryFixture.getHistoryListTriangleWayAndSunInCenter().stream()),
+        return Stream.concat(Stream.concat(MeteorologicalHistoryFixture.getHistoryListWithAlignedGradesRespectToSun().stream(),
+                MeteorologicalHistoryFixture.getHistoryListWithAlignedGradesNotRespectToSun().stream()),
                 MeteorologicalHistoryFixture.getHistoryListTriangleWayAndSunNotInCenter().stream());
     }
 }

@@ -1,6 +1,5 @@
 package co.rosemberg.weatherpredictor.service;
 
-import co.rosemberg.weatherpredictor.component.WeatherCalculator;
 import co.rosemberg.weatherpredictor.component.WeatherSimulator;
 import co.rosemberg.weatherpredictor.dao.HistoryDao;
 import co.rosemberg.weatherpredictor.dao.PlanetDao;

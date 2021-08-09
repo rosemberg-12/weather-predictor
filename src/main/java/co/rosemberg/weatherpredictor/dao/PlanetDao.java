@@ -1,6 +1,5 @@
 package co.rosemberg.weatherpredictor.dao;
 
-import co.rosemberg.weatherpredictor.domain.MeteorologicalHistory;
 import co.rosemberg.weatherpredictor.domain.Planet;
 import co.rosemberg.weatherpredictor.mapper.PlanetMapper;
 import co.rosemberg.weatherpredictor.repository.PlanetRepository;

@@ -1,6 +1,5 @@
 package co.rosemberg.weatherpredictor.mapper;
 
-import co.rosemberg.weatherpredictor.domain.Planet;
 import co.rosemberg.weatherpredictor.domain.Weather;
 import co.rosemberg.weatherpredictor.entity.MeteorologicalHistory;
 import co.rosemberg.weatherpredictor.entity.MeteorologicalHistoryEntry;
