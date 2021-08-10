@@ -21,6 +21,15 @@ public class Planet {
 
     private String rotation;
 
+    public Planet(){};
+
+    public Planet(String name, Integer distanceFromSun, Integer angularVelocity, String rotation) {
+        this.name = name;
+        this.distanceFromSun = distanceFromSun;
+        this.angularVelocity = angularVelocity;
+        this.rotation = rotation;
+    }
+
     public String getName() {
         return name;
     }
